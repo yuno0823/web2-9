@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Google Maps API サンプル</title>
+    <title>Google Maps API</title>
     <style type="text/css">
       html, body { height: 100%; margin: 0; padding: 0; }
       #map { height: 100%; }
@@ -16,8 +16,8 @@
         var map = new google.maps.Map(document.getElementById('map'));
         // ルート検索
         var request = {
-            origin: "東京工芸大学 厚木キャンパス",// 出発地
-            destination: "東京工芸大学 中野キャンパス",// 目的地
+            origin: "東京工芸大学 厚木キャンパス",
+            destination: "東京工芸大学 中野キャンパス",
             travelMode: google.maps.TravelMode.DRIVING,
             drivingOptions: {
                 departureTime: new Date(),
@@ -28,15 +28,14 @@
         directionsService.route(request, function(response, status) {
           if (status == google.maps.DirectionsStatus.OK) {
           var directionsRenderer = new google.maps.DirectionsRenderer({map:map});
-          directionsRenderer.setDirections(response);// ルートの表示
-            // ポイントごとに場所の名前の情報を出す
+          directionsRenderer.setDirections(response);
             var service = new google.maps.places.PlacesService(map);
             response.geocoded_waypoints.forEach(function(e){
               service.getDetails({placeId: e.place_id}, function (place, status) {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                   var infowindow = new google.maps.InfoWindow({
-                    content : place.name,// 名前
-                    position : place.geometry.location,// 場所
+                    content : place.name,
+                    position : place.geometry.location,
                     pixelOffset: new google.maps.Size(0,-50),
                     map: map
                   });
